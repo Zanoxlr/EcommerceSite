@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@350&display=swap");
+body {
+    background-color: #EDF2EA;
+    font-size: 17px;
+    line-height: 17px;
+    font-family: 'Manrope', sans-serif;
+    display: block;
+    position: relative;
+    min-height: 100vh;
+}
+
+aside {
+    float: left;
+    top: 200px;
+    width: 270px;
+    left: 10px;
+    background: #E1E5DE;
+    border: 3px solid #D2D4C8;
+    overflow-x: hidden;
+    padding: 8px 0;
+    text-align: left;
+    margin-top: 40px;
+}
+
+.input {
+    margin: 5px;
+    margin-left: 10px;
+}
+
+.article {
+    display: flex;
+}
+
+form {
+    color: #131C16;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    height: 50px;
+    float: right;
+}
+
+.cart {
+    height: 50px;
+    width: 55px;
+    margin: 10px;
+}
+
+.centered {
+    position: absolute;
+    top: 54%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.header {
+    color: #EDF2EA;
+    width: auto;
+    height: 80px;
+    text-align: center;
+    border: 3px solid #D2D4C8;
+    background-color: #5F7470;
+}
+
+.searchbar {
+    border-radius: 7px;
+    margin: 10px;
+    width: 350px;
+    height: 50px;
+    background-color: rgb(250, 250, 250);
+}
+
+.footer {
+    color: #EDF2EA;
+    width: 100%;
+    text-align: center;
+    border: 3px solid #D2D4C8;
+    background-color: #5F7470;
+    clear: both;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -100px;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-left: 2px;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.container-items {
+    margin: 0 auto;
+    padding: 15px;
+    width: 100%;
+}
+
+.inner {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+@media(min-width: 1500px) {
+    .container-items {
+        width: 1500px;
+    }
+}
+
+.item {
+    border: 2px solid #E0E2DB;
+    color: #5F7470;
+    background-color: #E1E5DE;
+    float: left;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 15px;
+    text-align: center;
+    width: 400px;
+    height: 400px;
+}
+
+.img {
+    max-height: 200px;
+    width: auto;
+    border: #E1E5DE 5px;
+}
+
+.buyButton {
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    color: #131C16;
+    font-size: 25px;
+}

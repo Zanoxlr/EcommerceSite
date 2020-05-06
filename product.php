@@ -48,7 +48,7 @@
      
 
 
-    <!-- Header stuff-->
+    <!-- Footer stuff-->
     <footer class="footer">
         <h5>a webstore</h5>
     </footer>

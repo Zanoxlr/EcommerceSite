@@ -1,3 +1,5 @@
+// when the page is loaded start BasketUpdate and
+// get items in your cart
 $(document).ready(function() {
     getDBresult();
     BasketUpdate();
@@ -6,22 +8,22 @@ $(document).ready(function() {
 $("#buyButton").click(function() {
     Buy();
 });
-
+// POSTs ids of items in cart to the server to receive
+// json file which tells you its attributes
 function getDBresult() {
-
     $.ajax({
         type: "POST",
         url: "php/cartDB.php",
-
         success: function(data) {
-
+            // parses the resposne to an array
             dataARR = JSON.parse(data);
             html = "";
-
+            // sets the price
             $("#Price").text("Price: " + dataARR[dataARR.length - 1] + " €");
-
+            // for each object in the array
+            // it appends a html div
             for (var a = 0; a < (dataARR.length - 1); a++) {
-
+                // sets the values
                 var _id = dataARR[a][0];
                 var _name = dataARR[a][1];
                 var _price = dataARR[a][2];
@@ -32,13 +34,14 @@ function getDBresult() {
                     "€</p><p id=" + _id + "q>" + _quantity + "</p><button onClick='AddCookies(" + _id + "," + 1 +
                     ")'>Add</button><button onClick='AddCookies(" + _id + "," + -1 +
                     ")'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Delete</button></picture></div>";
-                // replacing the text
+                // adding the divs
                 document.getElementById("cart").innerHTML = html;
             }
         }
     });
 }
-
+// on an int value it returns a string
+// on its amount
 function StockInfoMethod(stock) {
     if (stock > 5) {
         return "<p>In Stock</p>";
@@ -48,12 +51,12 @@ function StockInfoMethod(stock) {
         return "<p>Not available</p>";
     }
 }
-
+// starts the methods to update the cart
 function InTheBasket(cname) {
     AddCookies(cname, 1);
     BasketUpdate();
 }
-
+// sets the cookie with attributes
 function AddCookies(cname, num) {
     val = Cookies.get(cname);
     if (val == null || val == "Nan") {
@@ -68,7 +71,7 @@ function AddCookies(cname, num) {
     QuantityUpdate(cname, num);
     BasketUpdate();
 }
-
+// updates the count for items in the basket
 function BasketUpdate() {
     var num = 0;
     arr = Object.values(Cookies.get());
@@ -80,13 +83,14 @@ function BasketUpdate() {
     $('#shopingCart').text(num);
     PriceUpdate();
 }
-
+// removes the cookie by id
 function RemoveCookies(id) {
     Cookies.remove(id);
     $("#" + id).remove();
     BasketUpdate();
 }
-
+// updates the count of items in cart
+// on the client realtime 
 function QuantityUpdate(id, typeOfChange) {
     select = $("#" + id + "q");
     if (typeOfChange == 1 || typeOfChange == -1) {
@@ -99,18 +103,14 @@ function QuantityUpdate(id, typeOfChange) {
         RemoveCookies(id);
     }
 }
-
+// updates price realtime on client
 function PriceUpdate(price) {
     $("#price").text(price);
 }
-
+// request to buy items in cart
 function Buy() {
-
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "php/purchase.php",
-        success: function() {
-
-        }
     });
 }

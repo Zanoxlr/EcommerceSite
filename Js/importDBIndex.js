@@ -1,8 +1,11 @@
+// when the page is loaded start BasketUpdate and
+// get items in your cart
 $(document).ready(function() {
     getDBresult();
     BasketUpdate();
 });
-
+// gets the string inputed in the search bar
+// and calls getDBresult method
 $('#search').keyup(function() {
     var search = $('#search').val();
     if (search != '') {
@@ -11,29 +14,29 @@ $('#search').keyup(function() {
         getDBresult();
     }
 });
-
+// POSTs filter attributes of items to the server to receive
+// json file which displays those items
 function getDBresult($query) {
-
+    // gets all values from radio buttons 
     $BrandVal = $('input[name="BrandID"]:checked').val();
     $CategoryVal = $('input[name="CategoryID"]:checked').val();
     $PriceVal = $('input[name="Price"]:checked').val();
     $StockVal = $('input[name="Stock"]:checked').val();
     $RateVal = $('input[name="Rate"]:checked').val();
-
-
+    // POSTs the values
     $.ajax({
-
         type: "POST",
         url: "php/data.php",
         data: { query: $query, BrandID: $BrandVal, CategoryID: $CategoryVal, Price: $PriceVal, Stock: $StockVal, Rate: $RateVal },
-
+        // on servers response
         success: function(data) {
-
+            // parses the response to an array
             dataARR = JSON.parse(data);
             html = "";
-
+            // for each object in array it appends the 
+            // info into a html div
             for (var a = 0; a < dataARR.length; a++) {
-
+                // gets data for each element in the object
                 var _id = dataARR[a][0];
                 var _name = dataARR[a][1];
                 var _price = dataARR[a][2];
@@ -43,7 +46,7 @@ function getDBresult($query) {
                 var modText = TextLengthEdit(_name);
                 // appending in html
                 html += "<div class='item'><picture><img onclick=\"location.href='product.php?id=" + _id + "';\" src='img/" + _id + ".webp' class='img'><p>" + modText + "</p><p>" + _price + "€</p><p>" + modStock + "</p><button onClick='AddCookies(" + _id + "," + 1 + ")'>Add</button><button onClick='AddCookies(" + _id + "," + -1 + ")'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Remove</button></picture></div > ";
-                // replacing the text
+                // adding the divs
                 document.getElementById("item").innerHTML = html;
             }
         }
@@ -68,12 +71,12 @@ function TextLengthEdit(_text) {
         return _text;
     }
 }
-
+// starts the methods to update the cart
 function InTheBasket(cname) {
     AddCookies(cname, 1);
     BasketUpdate();
 }
-
+// sets the cookie with attributes
 function AddCookies(cname, num) {
     val = Cookies.get(cname);
     if (val == null || val == "Nan") {
@@ -83,7 +86,7 @@ function AddCookies(cname, num) {
     }
     BasketUpdate();
 }
-
+// updates the count for items in the basket
 function BasketUpdate() {
     var num = 0;
     arr = Object.values(Cookies.get());

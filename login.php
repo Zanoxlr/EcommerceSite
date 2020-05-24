@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Register</title>
     <!-- import CSS -->
     <link rel="stylesheet" type="text/css" href="css\loginRegister.css" async>
     <link rel="stylesheet" type="text/css" href="css\style.css" async>
-	<!-- import JS -->
+    <!-- import JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="Js/methods.js"></script>
     <script type="text/javascript" src="Js/register.js"></script>
-    <meta charset="UTF-8">
-    <title>Main site</title>
 </head>
 <body>
     <!-- Header stuff-->

@@ -1,25 +1,32 @@
 <?php
 // set the data
-$brandIDOption = getSqlData("BrandName","brand","BrandID");
-$CategoryIDOption = getSqlData("CategoryName","category","CategoryID");
+$bigData=array();
+$bigData[] = getSqlData("BrandName","brand","BrandID");
+$bigData[] = getSqlData("CategoryName","category","CategoryID");
+// return the data
+echo json_encode($bigData);
+
 // creates radio buttons for filter
 function getSqlData($queryVal,$dbName,$queryValID){
-    // set to null
-    $queryReturn = "";
     // connect to the database
-    include('php/database_connection.php');
+    include('database_connection.php');
     // set the query
     $query = "SELECT DISTINCT produkti.$queryValID, $dbName.$queryVal FROM produkti INNER JOIN $dbName ON $dbName.ID = produkti.$queryValID ORDER BY $dbName.$queryVal ASC";
     // execute the query
     $statement = $connect->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
-    // create radio buttons
+    // create an array
+    $data = array();
+    // insert values into array
     foreach ($result as $row)
-    {        
-        $queryReturn .="<input type='radio' name='$queryValID' class='input' value=".$row[0]."><label for=".$row[0].">".$row[$queryVal]."</label><br>";
+    {
+        $sub_data = array();
+        $sub_data[] = $queryValID; // ID_type, BrandID
+        $sub_data[] = $row[0]; // ID
+        $sub_data[] = $row[$queryVal]; // Name_type, BrandName
+        $data[] = $sub_data;
     }
-    // return the results
-    return $queryReturn;
+    return $data;
 }
 ?>

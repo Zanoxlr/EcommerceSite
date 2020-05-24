@@ -55,7 +55,7 @@ body {
     padding: 0 15px;
 }
 
-.register form input[type="submit"] {
+.register form input[type="button"] {
     width: 100%;
     padding: 15px;
     margin-top: 20px;

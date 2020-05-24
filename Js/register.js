@@ -12,7 +12,7 @@ function RegisterInput() {
     $mail = $("#inputMail").val();
     $password = $("#inputPassword").val();
     $passwordRepeat = $("#inputPasswordRepeat").val();
-
+    // check if passwords are matching
     if ($password != $passwordRepeat) {
         errorHandler(2);
     } else {

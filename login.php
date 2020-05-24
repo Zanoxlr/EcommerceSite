@@ -4,10 +4,10 @@
     <!-- import CSS -->
     <link rel="stylesheet" type="text/css" href="css\loginRegister.css" async>
     <link rel="stylesheet" type="text/css" href="css\style.css" async>
-    <!-- import JS -->
+	<!-- import JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="Js/methods.js"></script>
-    <script type="text/javascript" src="Js/login.js"></script>
+    <script type="text/javascript" src="Js/register.js"></script>
     <meta charset="UTF-8">
     <title>Main site</title>
 </head>
@@ -23,12 +23,16 @@
             <img src="img/person-male.png" class="cart">
         </div>
     </div>
-    
     <!-- Article stuff-->
     <article>
     <div class="register">
-			<h1>Login</h1>
-			<form autocomplete="on">
+			<h1>Register</h1>
+			<form autocomplete="on" type="hidden">
+                <!-- email -->
+                <label for="email">
+					<i class="fas fa-envelope"></i>
+				</label>
+                <input type="email" name="email" placeholder="Email" id="inputMail" required>
                 <!-- username -->
 				<label for="username">
 					<i class="fas fa-user"></i>
@@ -39,14 +43,16 @@
 					<i class="fas fa-lock"></i>
 				</label>
                 <input type="password" name="password" placeholder="Password" id="inputPassword" required>
+                <!-- repeat password --> 
+                <label for="passwordD">
+					<i class="fas fa-lock"></i>
+				</label>
+                <input type="password" name="passwordD" placeholder="Verify password" id="inputPasswordRepeat" required>
+                <h4 onclick="location.href='login.php';">Already have an account? Click here to login</h4>
                 <!-- problems -->
                 <br><p id="labelInfo"></p>
-                <!-- register -->
-                <h4 onclick="location.href='register.php';">Havent got the account? Click here to register</h4>
-                <!-- logout -->
-                <h5 onclick="location.href='php/logout.php';">Logout</h5>
                 <!-- submit -->
-                <input type="button" id="submit" value="Login">
+                <input type="button" id="submit" value="Register">
                 <i class="fas fa-lock"></i>
 			</form>
 		</div>

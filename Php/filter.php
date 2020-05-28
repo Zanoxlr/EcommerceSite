@@ -1,4 +1,7 @@
 <?php
+// log activity
+include("activity.php");
+PostActivity(3);
 // set the data
 $bigData=array();
 $bigData[] = getSqlData("BrandName","brand","BrandID");

@@ -1,4 +1,7 @@
 <?php
+// log activity
+include("activity.php");
+PostActivity(1);
 // connect to database
 include('database_connection.php');
 // set value

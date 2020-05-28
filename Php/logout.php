@@ -1,4 +1,7 @@
 <?php
+// log activity
+include("activity.php");
+PostActivity(5);
 // check if session exists
 if (!isset($_SESSION)) {
      header("Location: ../login.php");

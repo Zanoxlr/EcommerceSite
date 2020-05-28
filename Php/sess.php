@@ -1,43 +1,41 @@
 <?php
-// set as array
+// set array
 $isValidArr = array();
-// get the array values
-$isValidArr = ValidSession();
-// check if the session is valid
+// get array values
+$isValidArr = ValidSession(); // [isValid, userID, seshIDVal]
+
 function ValidSession(){
-    // connect to the database
+    // get PDO connected
     include('database_connection.php');
-    // if no session
+    // check id session exists in cookies
     session_start();
     if(!isset($_SESSION["idVal"])){
-        $isValid = FALSE;
+        $isValid = false;
         $userID = null;
-        return array($isValid, $userID);
+        return array($isValid, $userID, null);
     }
-    // sesison exists
     else{
-        // get the session id
+        // get sessionID value and quote it
         $seshIDVal = $_SESSION["idVal"];
-        // prepare and execute the query
-        $query = "SELECT * FROM `sessions` WHERE sessionID = \"$seshIDVal\"";
+        // get exDate and userID from DB
+        $query = "SELECT UserID, exDate FROM `sessions` WHERE sessionID = \"$seshIDVal\"";
         $statement=$connect->prepare($query);
         $statement->execute();
         $result=$statement->fetchAll();
-        // set the date in the right format
+        // get current date
         date_default_timezone_set("Europe/Ljubljana");
         $date = date("Y-m-d G:i:s");
-        // get the userID
-        $userID = $result[0][0];
-        // invalid date
-        if ($result[0][3] <= $date) {
+        $userID = $result[0]["UserID"]; // UserID
+        // compare crDate and currnet date
+        if ($result[0]["exDate"] <= $date) {
+            // invalid
             $isValid = FALSE;
         }
-        // valid date
         else{
+            //valid
             $isValid = TRUE;
         }
-        // return the array
-        return array($isValid, $userID);
+        return array($isValid, $userID, $seshIDVal);
     }
 }
 ?>

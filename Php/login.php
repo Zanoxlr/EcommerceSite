@@ -5,7 +5,7 @@ include('database_connection.php');
 $usernameVal=$passwordVal=$message="";
 // get the username
 if(isset($_POST["username"])) {
-  $usernameVal = $connect->quote($_POST['username']);
+  $usernameVal = $_POST['username'];
 } else{
   // username not inserted
   $message .= "2";
@@ -13,7 +13,7 @@ if(isset($_POST["username"])) {
   // get the password
 if(isset($_POST["password"]))
 {
-  $passwordVal = $connect->quote($_POST["password"]);
+  $passwordVal = $_POST["password"];
 } else{
   // password not inserted
   $message .= "3";
@@ -32,17 +32,16 @@ if($result == null){
 }
 else{
   // set the server password hash
-  $serverPass = $result[0]["Password"];
+  $serverPass = $result[0][0]; // password
   // verify password
   if(password_verify($passwordVal, $serverPass)){
-    $message .= GetSession($result[0]["ID"]);
+    $message .= GetSession($result[0][1]); // ID
   }
   else{
     // password is invalid
     $message .= "4";
   }
   echo $message;
-  unset($connect);
 }
 // creates and inserts the session id into the database
 function GetSession($id){

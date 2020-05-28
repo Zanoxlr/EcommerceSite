@@ -3,7 +3,6 @@
 $(document).ready(function() {
     getDBresult();
     BasketUpdate();
-
 });
 $("#buyButton").click(function() {
     Buy();
@@ -29,11 +28,7 @@ function getDBresult() {
                 var _price = dataARR[a][2];
                 var _quantity = dataARR[a][4];
                 // appending in html
-                html += "<div class='item' id=" + _id + "><picture><img onclick=\"location.href='product.php?id=" + _id + "';\" src='img/" + _id +
-                    ".webp' class='img'><p>" + _name + "</p><p>" + _price +
-                    "€</p><p id=" + _id + "q>" + _quantity + "</p><button onClick='AddCookies(" + _id + "," + 1 +
-                    ")'>Add</button><button onClick='AddCookies(" + _id + "," + -1 +
-                    ")'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Delete</button></picture></div>";
+                html += "<div class='item' id=" + _id + "><picture><img onclick=\"location.href='product.php?id=" + _id + "';\" src='img/" + _id + ".webp' class='img'><p>" + _name + "</p><p>" + _price + "€</p><p id=" + _id + "q>" + _quantity + "</p><button onClick='AddCookies(" + _id + "," + 1 + ", 1 )'>Add</button><button onClick='AddCookies(" + _id + "," + -1 + ", 1 )'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Delete</button></picture></div>";
                 // adding the divs
                 document.getElementById("cart").innerHTML = html;
             }

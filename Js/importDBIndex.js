@@ -6,15 +6,8 @@ $(document).ready(function() {
     filter();
 });
 // on radio button click
-$("input[type='radio']").click(getDBresult());
-// inputed text into search bar
-$('#search').keyup(function() {
-    var search = $('#search').val();
-    if (search != '') {
-        getDBresult(search);
-    } else {
-        getDBresult();
-    }
+$(document).on("click", ".input", function() {
+    getDBresult();
 });
 // gets the string inputed in the search bar
 // and calls getDBresult method
@@ -35,7 +28,6 @@ function getDBresult($query) {
     $PriceVal = $('input[name="Price"]:checked').val();
     $StockVal = $('input[name="Stock"]:checked').val();
     $RateVal = $('input[name="Rate"]:checked').val();
-    console.log($BrandVal);
     // POSTs the values
     $.ajax({
         type: "POST",
@@ -60,7 +52,7 @@ function getDBresult($query) {
                     var modStock = StockInfoMethod(_stock);
                     var modText = TextLengthEdit(_name);
                     // appending in html
-                    html += "<div class='item'><picture><img onclick=\"location.href='product.php?id=" + _id + "';\" src='img/" + _id + ".webp' class='img'><p>" + modText + "</p><p>" + _price + "€</p><p>" + modStock + "</p><button onClick='AddCookies(" + _id + "," + 1 + ")'>Add</button><button onClick='AddCookies(" + _id + "," + -1 + ")'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Remove</button></picture></div > ";
+                    html += "<div class='item'><picture><img onclick=\"location.href='product.php?id=" + _id + "';\" src='img/" + _id + ".webp' class='img'><p>" + modText + "</p><p>" + _price + "€</p><p>" + modStock + "</p><button onClick='AddCookies(" + _id + "," + 1 + ")'>Add</button><button onClick='AddCookies(" + _id + "," + -1 + ")'>Subtract</button><button onClick='RemoveCookies(" + _id + ")'>Remove</button></picture></div >";
                     // adding the divs
                     document.getElementById("item").innerHTML = html;
                 }
@@ -78,7 +70,6 @@ function filter() {
         success: function(data) {
             // parses the response to an array
             arr = JSON.parse(data);
-
             // for each object in array in array it appends the 
             // info into a html div as radio button
             for (var a = 0; a < arr.length; a++) {
@@ -86,15 +77,12 @@ function filter() {
                 $html = "";
                 for (var b = 0; b < arr[a].length; b++) {
                     // appends data to radio button
-                    $html = "<input type='radio' name=" + arr[a][b][0] + " value=" + arr[a][b][1] +
-                        " class='input'><label for=" + arr[a][b][0] +
-                        ">" + arr[a][b][2] +
-                        "</label><br>";
+                    $html = "<input type='radio' name=" + arr[a][b][0] + " value=" + arr[a][b][1] + " class='input'><label for=" + arr[a][b][0] + ">" + arr[a][b][2] + "</label><br>";
                     // adding in the div
                     if (a == 0) {
-                        $("#BrandID").after($html);
+                        $("#BrandID").before($html);
                     } else if (a == 1) {
-                        $("#CategoryID").after($html);
+                        $("#CategoryID").before($html);
                     }
                 }
             }

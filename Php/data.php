@@ -1,4 +1,7 @@
 <?php
+// log activity
+include_once("activity.php");
+PostActivity(2);
 $output='';
 // connection to the database
 include('database_connection.php');
@@ -86,7 +89,7 @@ function AndWhereCounter($stringVal,$stringName){
             $query .=" WHERE ";
         }
         // add to the query and +1 on the counter
-        if($stringName == "Stock" || $stringVal == 1){
+        if($stringName == "Stock" && $stringVal == 1){
             $query .= $stringName.">=".$stringVal;
         }
         else{

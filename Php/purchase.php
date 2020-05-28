@@ -3,7 +3,7 @@
 include("sess.php");
 $userID =  $isValidArr[1];
 // check if the session id valid
-if($isValidArr[0] == null){
+if($isValidArr[0] == false){
     header("Location: ../login.php");
 }
 else{
@@ -81,7 +81,7 @@ for($i = 0;$i < count($data); $i++){
 $text .= "<tr id=\"hiderow\"><td colspan=\"5\"><br></td></tr><tr><td colspan=\"2\" class=\"blank\"> </td><td colspan=\"2\" class=\"total-line balance\">Balance Due</td><td class=\"total-value balance\"><div class=\"due\">".$cost." €</div></td></tr>";
 CreateReceipt($cost,$text,$data,$userID);
 
-header("Location: ../index.php");
+//header("Location: ../index.php");
 }
 // creates an Invoice based on data
 function CreateReceipt($price,$text,$data,$userID){

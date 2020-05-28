@@ -22,18 +22,34 @@ function InTheBasket(cname) {
     BasketUpdate();
 }
 // sets the cookie with attributes
-function AddCookies(cname, num) {
+function AddCookies(cname, num, more) {
     val = Cookies.get(cname);
     if (val == null || val == "Nan") {
         Cookies.set(cname, 1, {
             expires: 60
         });
+        // fixes a bug where you click subtract
+        // when val = 0 and it does +1
+        if (num == -1) {
+            newVal = 0;
+        } else {
+            newVal = 1;
+        }
+        // calculates a new value based on the num
     } else {
-        Cookies.set(cname, parseInt(val) + num, {
+        newVal = parseInt(val) + num;
+        Cookies.set(cname, newVal, {
             expires: 60
         });
     }
-    QuantityUpdate(cname, num);
+    // remove if its less than 1
+    if (newVal < 1) {
+        RemoveCookies(cname);
+    }
+    // check if you call QuantityUpdate
+    if (more == 1) {
+        QuantityUpdate(cname, newVal);
+    }
     BasketUpdate();
 }
 // updates the count for items in the basket
@@ -51,20 +67,22 @@ function BasketUpdate() {
 // removes the cookie by id
 function RemoveCookies(id) {
     Cookies.remove(id);
-    $("#" + id).remove();
+    $("#" + (id.toString())).remove();
     BasketUpdate();
 }
 // updates the count of items in cart
 // on the client realtime 
-function QuantityUpdate(id, typeOfChange) {
+function QuantityUpdate(id, value) {
     select = $("#" + id + "q");
-    if (typeOfChange == 1 || typeOfChange == -1) {
-        select.text(parseInt(select.text()) + typeOfChange);
 
-    } else if (typeOfChange == 0) {
+    if (value != null) {
+        select.text(value);
+
+    } else {
         select.text() = "";
     }
-    if (select.text() == 0) {
+    // remove if its value is less than 1
+    if (value < 1) {
         RemoveCookies(id);
     }
 }

@@ -25,31 +25,31 @@
     </div>
     <!-- Article stuff-->
     <article>
-    <div class="register">
+   		<div class="register">
 			<h1>Login</h1>
-			<form autocomplete="on">
-                <!-- username -->
-				<label for="username">
+				<form autocomplete="on">
+              		<!-- username -->
+					<label for="username">
 					<i class="fas fa-user"></i>
-				</label>
-                <input type="text" name="username" placeholder="Username" id="inputUsername" required>
-                <!-- password -->
-				<label for="password">
+					</label>
+                	<input type="text" name="username" placeholder="Username" id="inputUsername" required>
+                	<!-- password -->
+					<label for="password">
 					<i class="fas fa-lock"></i>
-				</label>
-                <input type="password" name="password" placeholder="Password" id="inputPassword" required>
-                <!-- problems -->
-                <br><p id="labelInfo"></p>
-                <!-- register -->
-                <h4 onclick="location.href='register.php';">Havent got the account? Click here to register</h4>
-                <!-- logout -->
-                <h5 onclick="location.href='php/logout.php';">Logout</h5>
-                <!-- submit -->
-                <input type="button" id="submit" value="Login">
-                <i class="fas fa-lock"></i>
-			</form>
-		</div>
-    </article>
+					</label>
+                	<input type="password" name="password" placeholder="Password" id="inputPassword" required>
+                	<!-- problems -->
+                	<br><p id="labelInfo"></p>
+                	<!-- register -->
+                	<h4 onclick="location.href='register.php';">Havent got the account? Click here to register</h4>
+                	<!-- logout -->
+                	<h5 onclick="location.href='php/logout.php';">Logout</h5>
+                	<!-- submit -->
+                	<input type="button" id="submit" value="Login">
+                	<i class="fas fa-lock"></i>
+				</form>
+			</div>
+    	</article>
     <footer class="footer">
         <h5>ZTech web store @2020</h5>
     </footer>
